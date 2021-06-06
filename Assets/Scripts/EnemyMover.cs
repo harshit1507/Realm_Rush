@@ -7,7 +7,7 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] List<Waypoint> path = new List<Waypoint>();
     [Range(0f, 5f)] [SerializeField] float speed = 1f;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         FindPath();
         ReturnToStart();
@@ -61,7 +61,7 @@ public class EnemyMover : MonoBehaviour
             
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
 }
