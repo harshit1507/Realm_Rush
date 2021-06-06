@@ -9,7 +9,36 @@ public class EnemyMover : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FindPath();
+        ReturnToStart();
         StartCoroutine(FollowPath());        
+    }
+
+    //void FindPath()
+    //{
+    //    GameObject parent = GameObject.FindGameObjectWithTag("Path");
+
+    //    foreach (Transform child in parent.transform)
+    //    {
+    //        path.Add(child.GetComponent<Waypoint>());
+    //    }
+    //}
+
+    void FindPath()
+    {
+        path.Clear();
+
+        GameObject[] waypoints = GameObject.FindGameObjectsWithTag("Path");
+
+        foreach(GameObject waypoint in waypoints)
+        {
+            path.Add(waypoint.GetComponent<Waypoint>());
+        }
+    }
+
+    void ReturnToStart()
+    {
+        transform.position = path[0].transform.position;
     }
 
     IEnumerator FollowPath()
@@ -31,5 +60,8 @@ public class EnemyMover : MonoBehaviour
             }
             
         }
+
+        Destroy(gameObject);
     }
+
 }
